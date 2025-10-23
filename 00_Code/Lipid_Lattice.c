@@ -283,8 +283,8 @@ void main()
 
     if (nr_types == 2) printf("WARNING: Simulations with two lipids is not yet properly implementend!\n");
 
-    srandom(seed);                                      // random with the same seed
-    //srandom(clock());                                   // random with the clock to have different starting structures
+    //srandom(seed);                                      // random with the same seed
+    srandom(clock());                                   // random with the clock to have different starting structures
     quotf = pow(2.0,-31.0);                             // quotient used for several calculations
 
     printf("Variables defined...\n");
@@ -345,24 +345,25 @@ void calc_evolution()
         sprintf(fname,"%s/%d/contacts.dat",project_name,n);
         fconfig = fopen(fname,"w");
 
-        if (nr_types == 1) fprintf(fconfig, "t dd cc cd\n");
-        if (nr_types == 2) fprintf(fconfig, "t 11 22 12 cc c1 c2\n");
+        if (nr_types == 1) fprintf(fconfig, "t dd cc cd E\n");
+        if (nr_types == 2) fprintf(fconfig, "t 11 22 12 cc c1 c2 E\n");
 
         for (t=1;t<=nr_steps;t++){
             
             if (t%(nr_steps/(nr_data*nr_count)) == 0){
 
                 count_neighbors();
+		        double ener = ener_total();
 
                 if (nr_types == 1){
-                    fprintf(fconfig, "%d %d %d %d\n",
-                    t,neightype[1][1],neightype_cc,neightype_dc[1]);
+                    fprintf(fconfig, "%d %d %d %d %lf\n",
+                    t,neightype[1][1],neightype_cc,neightype_dc[1],ener);
                 }
 
                 if (nr_types == 2){
-                    fprintf(fconfig, "%d %d %d %d %d %d %d\n",
+                    fprintf(fconfig, "%d %d %d %d %d %d %d %lf\n",
                     t, neightype[1][1], neightype[2][2], neightype[2][1],
-                    neightype_cc, neightype_dc[1], neightype_dc[2]);
+                    neightype_cc, neightype_dc[1], neightype_dc[2],ener);
                 }
             }
 
@@ -458,7 +459,7 @@ void mc_move_chol(int l)
 
     if (mv_type == 0){
         l_new = random()%(nr_lattice);
-        if (l_new = l) l_new = (l_new + 1)%nr_lattice;
+        if (l_new == l) l_new = (l_new + 1)%nr_lattice;
     }
     if (mv_type == 1){
         m = random()%(2*dim);
