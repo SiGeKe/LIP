@@ -2003,7 +2003,7 @@ double Phi_L(int ord,int neighbor)
     double s = ((double)ord-50.0)/100.0;
     double n = (double)neighbor;
 
-    return (-27.324707*s*s+10.250992*s)*(n-0.00432*n*n);
+    return (-13.00*s*s-0.20*s)*(n-0.02*n*n);
 }
 
 /**
@@ -2019,8 +2019,7 @@ double Phi_P(int ord,int neighbor)
     double s = ((double)ord-50.0)/100.0;
     double n = (double)neighbor;
 
-    if(n == 4 && ord <= 92) return (-30.344);
-    return (-57.274922*s*s+48.593694*s)*(n-0.434*n*n);
+    return (-12.00*s*s+0.80*s)*(n-0.32*n*n);
 }
 
 /**
@@ -2057,13 +2056,13 @@ void MD_order()
                 p_MD[s] = (exp(-0.14122 + 7.51277*o -9.36903*o*o -4.43679*o*o*o -97.86418*o*o*o*o +192.92704*o*o*o*o*o+19.37517*o*o*o*o*o*o -168.20577*o*o*o*o*o*o*o));
             }
             if (c_chol == 0.1){
-                p_MD[s] = norm_dist(o,0.275,0.115);
+                p_MD[s] = norm_dist(o,0.266242429883346,0.15584716148881);
             }
             if (c_chol == 0.2){
-                p_MD[s] = norm_dist(o,0.31,0.1);
+                p_MD[s] = norm_dist(o,0.303489659288194,0.155431284082244);
             }
             if (c_chol == 0.3){
-                p_MD[s] = norm_dist(o,0.36,0.13);
+                p_MD[s] = norm_dist(o,0.352622871221787,0.153619794800945);
             }
         }
         if (lipid_type == 0){
@@ -2071,13 +2070,13 @@ void MD_order()
                 p_MD[s] = (exp(-0.9767356 + 8.69286553*o -12.7808724*o*o +12.12000201*o*o*o -21.41776641*o*o*o*o + 7.14478559*o*o*o*o*o));
             }
             if (c_chol == 0.1){
-                p_MD[s] = norm_dist(o,0.45,0.1);
+                p_MD[s] = norm_dist(o,0.404805087945088,0.183008055146023);
             }
             if (c_chol == 0.2){
-                p_MD[s] = norm_dist(o,0.55,0.15);
+                p_MD[s] = norm_dist(o,0.498731806873557,0.174224169351057);
             }
             if (c_chol == 0.3){
-                p_MD[s] = norm_dist(o,0.7,0.05);
+                p_MD[s] = norm_dist(o,0.591086345394284,0.15239698365142);
             }
         }
     }
