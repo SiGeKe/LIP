@@ -2,7 +2,7 @@
   <img src="logo.png" width="200px">
 </p>
 
-Lipid Lattice
+LIP - MC Lattice for the Simulation of Lipid Layers
 ==============================
 
 This program performs Monte-Carlo simulations of a lattice system of lipids and CHOL.
